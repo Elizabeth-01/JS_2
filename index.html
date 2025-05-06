@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Checker</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 30px;
+            background-color: #f4f4f4;
+        }
+
+        .checker-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .checker-container h2 {
+            margin-bottom: 20px;
+            color: #282c34;
+        }
+
+        .checker-container button {
+            background-color: #007bff; /* Blue button */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #282c34;
+        }
+    </style>
+</head>
+<body>
+
+<div class="checker-container">
+    <h2>Number Checker</h2>
+    <button onclick="findMultiples()">Find Multiples of 5</button>
+    <button onclick="findPrimes()">Find Primes in Range</button>
+    <div id="output"></div>
+</div>
+
+<script>
+    const outputDiv = document.getElementById('output');
+
+    function findMultiples() {
+        const limit = parseInt(prompt("Enter an integer to find multiples of 5 up to:"));
+        if (!isNaN(limit)) {
+            let multiples = [];
+            for (let i = 0; i <= limit; i += 5) {
+                multiples.push(i);
+            }
+            outputDiv.textContent = "Multiples of 5: " + multiples.join(', ');
+        } else {
+            outputDiv.textContent = "Invalid input.";
+        }
+    }
+
+    function isPrime(num) {
+        if (num <= 1) return false;
+        for (let i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i === 0) return false;
+        }
+        return true;
+    }
+
+    function findPrimes() {
+        const lowerBound = parseInt(prompt("Enter the lower bound for prime numbers:"));
+        const upperBound = parseInt(prompt("Enter the upper bound for prime numbers:"));
+
+        if (!isNaN(lowerBound) && !isNaN(upperBound) && lowerBound <= upperBound) {
+            let primes = [];
+            for (let i = lowerBound; i <= upperBound; i++) {
+                if (isPrime(i)) {
+                    primes.push(i);
+                }
+            }
+            outputDiv.textContent = `Prime numbers between ${lowerBound} and ${upperBound}: ${primes.join(', ')}`;
+        } else {
+            outputDiv.textContent = "Invalid input for prime range.";
+        }
+    }
+</script>
+
+</body>
+</html>
